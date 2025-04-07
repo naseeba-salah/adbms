@@ -1,0 +1,8 @@
+create table books(accno int auto_increment primary key unique,title varchar(100) unique not null,author varchar(50)not null,price float(6,2),type enum("lending","reference"),availability enum("yes","no"),publisherid int);
+create table publishers(publisherid int primary key auto_increment,name varchar(50) unique not null,address varchar(100));
+alter table books add constraint books_fkey_publisherid foreign key (publisherid) references publishers(publisherid);
+create table members(memberid int primary key auto_increment,name varchar(50) not null,address varchar(100),type enum("staff","student"));
+create table issues(issueid int primary key auto_incremnt,memberid int,accno int,issuedate date,duedate date,foreign key(memberid)references members(memberid),foreign key(accno) references books(accno));
+create table returns(returnid int primary key auto_increment,memberid int,accno int,returndate date,fine int default 0 check(fine>=0),foreign key (memb
+erid) references members (memberid),foreign key (accno) references books (accno));
+
