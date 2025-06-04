@@ -1,0 +1,74 @@
+-- 
+-- Roll No: 40
+-- Name: Naseeba Salahudheen
+-- Program: Assignment-I
+-- 
+
+
+--
+-- Table structure for table books
+--
+create table books(accno int auto_increment primary key unique,title varchar(100) unique not null,author varchar(50)not null,price float(6,2),type enum("lending","reference"),availability enum("yes","no"),publisherid int);
+
+alter table books add constraint books_fkey_publisherid foreign key (publisherid) references publishers(publisherid);
+-- ---------create/alter statement commands----------- # This line may be removed in the actual file
+
+--
+-- Table structure for table publishers
+--
+create table publishers(publisherid int primary key auto_increment,name varchar(50) unique not null,address varchar(100));
+-- ---------create/alter statement commands----------- # This line may be removed in the actual file
+--
+-- Table structure for table members
+--
+create table members(memberid int primary key auto_increment,name varchar(50) not null,address varchar(100),type enum("staff","student"));
+-- ---------create/alter statement commands----------- # This line may be removed in the actual file
+--
+-- Table structure for table issues
+--
+create table issues(issueid int primary key auto_increment,memberid int,accno int,issuedate date,duedate date,foreign key(memberid)references members(memberid),foreign key(accno) references books(accno));
+
+-- ---------create/alter statement commands----------- # This line may be removed in the actual file
+--
+-- Table structure for table returns
+--
+create table returns(returnid int primary key auto_increment,memberid int,accno int,returndate date,fine int default 0 check(fine>=0),foreign key (memb
+erid) references members (memberid),foreign key (accno) references books (accno));
+
+-- ---------create/alter statement commands----------- # This line may be removed in the actual file
+
+--
+-- Dumping data for table publishers
+--
+insert into publishers(name,address)values("delhi books","hill place"),("three leaves","ansari road"),("khanna","area ashok"),("viva books","darya road"),("mr Amit","ganj delhi");
+-- --------insert/update statement commands----------- # This line may be removed in the actcual file
+--
+-- Dumping data for table books
+--
+insert into books(title,author,price,type,availability,publisherid)values('Analog computation','Rajaraman',450,'lending','yes',1),('Computer programing','joseph',550,'reference','no',2),('theory and application','krishnamurthy',650,'lending','yes',3),('Data analytics','Dr Robert',450,'reference','yes',4),('Artificial intelligence','George',500,'lending','yes',5);
+-- --------insert/update statement commands----------- # This line may be removed in the actcual file
+--
+-- Dumping data for table members
+--
+insert into members(name,address,type)values('Appu','Newyork','student'),('Muhsina','Paris','staff'),('vaishu','Abudhabi','student'),('anan','Dubai','staff'),('Surya','Switzerland','student');
+
+-- --------insert/update statement commands----------- # This line may be removed in the actcual file
+--
+-- Dumping data for table issues
+--
+insert into issues(memberid,accno,issuedate,duedate)values(5,10,'2025-01-10','2025-02-15'),(4,9,'2025-03-01','2025-03-13'),(3,8,'2025-01-15','2025-02-01'),(2,7,'2025-02-01','2025-02-15'),(1,6,'2025-02-25','2025-03-20');
+
+-- --------insert/update statement commands----------- # This line may be removed in the actcual file
+--
+-- Dumping data for table returns
+--
+insert into returns(memberid,accno,returndate,fine)values(1,10,'2025-02-10',25),(2,9,'2025-03-13',0),(3,8,'2025-02-05',25),(4,7,'2025-02-15',0),(5,6,'2025-03-20',0);
+
+-- --------insert/update statement commands----------- # This line may be removed in the actcual file
+--
+-- SQl Query Statements
+--
+
+-- -----SQL query statments preceeded by the its question-------- # This line may be removed in the actual file
+-- -----Question number should be commented---------------#This line may be removed in the actual file
+
